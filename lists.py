@@ -12,6 +12,10 @@ os.system("javap -c -private "+c+" >/tmp/output.txt")
 f1=open("/tmp/output.txt","r")
 aa=f1.read()
 f1.close()
+f1=open("output.bin","bw")
+
+f1.close()
+
 bb=aa.split("\n")
 steps=0
 u="nop\n"
@@ -31,6 +35,8 @@ for aaa in bb:
             i=f1.read()
             f1.close()
             f1=open("output.bin","ba")
+            pp=len(i)
+            f1.write(bytearray([1,0,pp]))
             f1.write(i)
             f1.close()
 
@@ -54,6 +60,8 @@ for aaa in bb:
             i=f1.read()
             f1.close()
             f1=open("output.bin","ba")
+            pp=len(i)
+            f1.write(bytearray([1,0,pp]))
             f1.write(i)
             f1.close()
 
