@@ -39,12 +39,9 @@ for aaa in bb:
             f1.write(bytearray([1,0,pp]))
             f1.write(i)
             f1.close()
-
-            
             u="nop\n"
-            steps=steps+1
-            if steps==5:
-                pass
+           
+            
         g=aaa.find(": ")
         if g>-1:
             
@@ -64,7 +61,7 @@ for aaa in bb:
             f1.write(bytearray([1,0,pp]))
             f1.write(i)
             f1.close()
-
+            u="nop\n"
 
 os.system("rasm2 -a java -b 16 -D -B -f output.bin")
 
