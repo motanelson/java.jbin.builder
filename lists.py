@@ -65,6 +65,7 @@ for aaa in bb:
             f1.write(i)
             f1.close()
 
+
 os.system("rasm2 -a java -b 16 -D -B -f output.bin")
 
 
