@@ -13,10 +13,12 @@ os.system("javap -c -private "+c+" >/tmp/output.txt")
 f1=open("/tmp/output.txt","r")
 aa=f1.read()
 f1.close()
-f1=open("output.bin","bw")
+f1=open("output.jbin","bw")
+op="JBIN".encode()
+f1.write(op)
 f1.close()
 
-i=bytearray(0)
+i=bytearray([0])
 bb=aa.split("\n")
 steps=0
 u="nop\n"
@@ -29,13 +31,13 @@ for aaa in bb:
         gggg=aaa.find("void")
         if (g>-1 or gg>-1 or ggg>-1) and steps==0:
             
-            f1=open("output.bin","ba")
+            f1=open("/tmp/output.jbin","ba")
             pp=len(i)
             f1.write(bytearray([1,0,pp]))
             f1.write(i)
             f1.close()
             u="nop\n"
-            i=bytearray(0)
+            i=bytearray([0])
             
         g=aaa.find(": ")
         xxx=aaa.strip()
@@ -45,6 +47,17 @@ for aaa in bb:
             aaa=aaa.strip()
             g=aaa.find("//")
             if g>-1:
+                zz=aaa[g+2:]
+                zz=zz.strip()
+                f1=open("output.jbin","ba")
+                zzz=zz.encode()
+                zzz=zzz+bytearray([0])
+                pp=len(zz)
+                f1.write(bytearray([1,0,pp]))
+                #print(zzz)
+                f1.write(zzz)
+                f1.close()
+                 
                 aaa=aaa[:g]
             aaa=aaa.strip()
             g=aaa.find("#")
@@ -61,7 +74,7 @@ for aaa in bb:
                 try:
                     
                     ii=var0[ui]
-                    #print("'"+ui+"'")
+                    
                     i=i+bytearray([int(ii)])
                     i=i+bytearray([int(n)])
                 except:
@@ -80,13 +93,18 @@ for aaa in bb:
             
         g=aaa.find("}")
         if g>-1:
-            f1=open("output.bin","ba")
+            f1=open("/tmp/output.jbin","ba")
             pp=len(i)
             f1.write(bytearray([1,0,pp]))
             f1.write(i)
             f1.close()
             u="nop\n"
-            i=bytearray(0)
+            i=bytearray([0])
             u="nop\n"
-
-os.system("rasm2 -a java -b 16 -D -B -f output.bin")
+f1=open("/tmp/output.jbin","br")
+zzz=f1.read()
+f1.close()
+f1=open("output.jbin","ba")
+f1.write(zzz)
+f1.close()
+#os.system("rasm2 -a java -b 16 -D -B -f output.jbin")
