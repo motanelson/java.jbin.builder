@@ -14,7 +14,6 @@ f1=open("/tmp/output.txt","r")
 aa=f1.read()
 f1.close()
 f1=open("output.bin","bw")
-f1=open("output.bin","bw")
 f1.close()
 
 i=bytearray(0)
